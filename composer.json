@@ -1,0 +1,20 @@
+{
+    "name": "qazo/codeinfinity-php-form",
+    "description": "A PHP web page for capturing data nd storing it in MongoDB",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Qazo\\CodeinfinityPhpForm\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Kwezilomso Mhaga",
+            "email": "kwezimhaga@live.com"
+        }
+    ],
+    "require": {
+        "mongodb/mongodb": "^1.5"
+    }
+}
