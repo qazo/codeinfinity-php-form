@@ -16,6 +16,7 @@
 		$isValidUser = $userValidator->validateUser();
 
 
+		$saveSuccess = false;
 		if (!$isValidUser) {
 			$messageClass = "alert-danger";
 			foreach ($userValidator->getErrors() as $err) {
@@ -24,7 +25,7 @@
 		} else {
 			$userStore = new \App\UserStore();
 			$recordCount = $userStore->storeUser($user);
-			echo $recordCount;
+			$saveSuccess = true;
 			$messageClass = "alert-success";
 			$message = "User info was successfuly stored!";
 		}
@@ -62,36 +63,35 @@
 			<div class="form-group">
 				<label for="name">Name:</label>
 				<input type="text" name="name" class="form-control" required
-					value="<?php isset($_POST['name']) ? $_POST['name'] : ''; ?>">
+					value="<?php echo (isset($_POST['name']) && !$saveSuccess) ? $user->getName() : ''; ?>">
 			</div>
 
 			<div class="form-group">
 				<label for="surname">Surname:</label>
 				<input type="text" name="surname" class="form-control" required
-					value="<?php isset($_POST['surname']) ? $_POST['surname'] : ''; ?>">
+					value="<?php echo (isset($_POST['surname']) && !$saveSuccess) ? $user->getSurname() : ''; ?>">
 			</div>
 
 			<div class="form-group">
 				<label for="idNumber">RSA ID:</label>
 				<input type="text" name="idNumber" class="form-control" required
-					value="<?php isset($_POST['idNumber']) ? $_POST['idNumber'] : ''; ?>">
+					value="<?php echo (isset($_POST['idNumber']) && !$saveSuccess) ? $user->getIdNumber() : ''; ?>">
 			</div>
 
 			<div class="form-group">
 				<label for="dateOfBirth">Date of Birth:</label>
 				<input type="text" id="dateOfBirth" name="dateOfBirth" class="form-control" required
-					value="<?php isset($_POST['dateOfBirth']) ? $_POST['dateOfBirth'] : ''; ?>">
+					value="<?php echo (isset($_POST['dateOfBirth']) && !$saveSuccess) ? $user->getDateOfBirth() : ''; ?>">
 			</div>
 
 			<br>
 			<button type="submit" name="submit" class="btn btn-primary">Submit</button>
-			<a class="btn btn-secondary" href="index.php">Cancel</a>
+			<a class="btn btn-secondary" href="https://google.com">Cancel</a>
 		</form>
 	</div>
 	<script>
 	$("#dateOfBirth").datepicker({
 		format: "dd/mm/yyyy",
-		orientation: "bottom auto"
 	});
 	</script>
 </body>
