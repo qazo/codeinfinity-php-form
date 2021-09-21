@@ -3,7 +3,7 @@ namespace App\Validation;
 
 class DateOfBirthValidator
 {
-	private const DATE_FORMAT = "d/m/Y";
+	public const DATE_FORMAT = "d/m/Y";
 
 	public static function isValidDateOfBirth(string $dateOfBirth): bool
 	{

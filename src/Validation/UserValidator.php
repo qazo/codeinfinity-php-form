@@ -15,18 +15,22 @@ class UserValidator
 	public function validateUser(): bool
 	{
 		$this->errors = [];
+		$dateOfBirth = $this->user->getDateOfBirth();
+		if (!DateOfBirthValidator::isValidDateOfBirth($dateOfBirth)) {
+			$this->errors[] = "Date of Birth is invalid. Date of birth must be in the format of 'dd/mm/YYYY' (31-12-2020).";
+		}
+
 		$idNumber = $this->user->getIdNumber();
 		if (!IdNumberValidator::isValidIdNumber($idNumber)) {
-			$this->errors[] = "ID number is invalid. Please use a valid RSA ID nummber. {$idNumber}";
+			$this->errors[] = "ID number is invalid. Please use a valid RSA ID nummber.";
+		}
+
+		if (!IdNumberValidator::isValidDateOfBirth($idNumber, $dateOfBirth)) {
+			$this->errors[] = "Date of Birth in ID number does not match the date of birth specified.";
 		}
 
 		if (\App\UserStore::idNumberExists($idNumber)) {
 			$this->errors[] = "The ID number specified already exists.";
-		}
-
-		$dateOfBirth = $this->user->getDateOfBirth();
-		if (!DateOfBirthValidator::isValidDateOfBirth($dateOfBirth)) {
-			$this->errors[] = "Date of Birth is invalid. Date of birth must be in the format of 'dd/mm/YYYY' (31-12-2020). {$dateOfBirth}";
 		}
 
 		return count($this->errors) == 0;

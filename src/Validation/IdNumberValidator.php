@@ -19,5 +19,14 @@ class IdNumberValidator
 		// could possibly validte the date of birth part as well
 		return strlen($idNumber) == self::ID_NUMBER_LENGTH;
 	}
+
+	public static function isValidDateOfBirth(string $idNumber, string $dateOfBirth): bool
+	{
+		$date = \DateTime::createFromFormat(DateOfBirthValidator::DATE_FORMAT, $dateOfBirth);
+		$formattedDateOfBirth = $date->format("ymd");
+
+		$idDateOfBirth = substr($idNumber, 0, 6);
+		return $formattedDateOfBirth == $idDateOfBirth;
+	}
 }
 ?>
