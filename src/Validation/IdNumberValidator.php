@@ -11,6 +11,10 @@ class IdNumberValidator
 			return false;
 		}
 
+		if (!is_numeric($idNumber)) {
+			return false;
+		}
+
 		// NOTE (Kwezilomso Mhaga <kwezimhaga@live.com>):
 		// could possibly validte the date of birth part as well
 		return strlen($idNumber) == self::ID_NUMBER_LENGTH;
