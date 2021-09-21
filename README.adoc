@@ -1,2 +1,13 @@
-# codeinfinity-php-form
+= codeinfinity-php-form
 A PHP web page for capturing data nd storing it in MongoDB
+
+== RUNNING
+
+.commands
+----
+composer install
+php -S 127.0.0.1:<port>
+
+----
+
+View in browser
